@@ -21,6 +21,10 @@ int stackSize;
 int codeSize;
 int debugMode;
 
+int getch(void) {
+    return getchar();
+}
+
 void resetVM(void) {
   pc = 0;
   t = -1;

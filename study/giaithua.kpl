@@ -1,0 +1,37 @@
+PROGRAM GiaiThua;
+
+VAR
+  n : INTEGER;
+  result : INTEGER;
+
+FUNCTION Factorial(n : INTEGER) : INTEGER;
+BEGIN
+  IF n <= 1 THEN
+    Factorial := 1
+  ELSE
+    Factorial := n * Factorial(n - 1);
+END;
+
+BEGIN
+  CALL WriteC('N');
+  CALL WriteC('h');
+  CALL WriteC('a');
+  CALL WriteC('p');
+  CALL WriteC(' ');
+  CALL WriteC('n');
+  CALL WriteC(':');
+  CALL WriteC(' ');
+  
+  n := READI;
+  
+  result := Factorial(n);
+  
+  CALL WriteLn;
+  CALL WriteI(n);
+  CALL WriteC('!');
+  CALL WriteC(' ');
+  CALL WriteC('=');
+  CALL WriteC(' ');
+  CALL WriteI(result);
+  CALL WriteLn;
+END.
