@@ -1,0 +1,101 @@
+(* ===================================================================
+   BÀI 7: TÍNH ƯỚC SỐ CHUNG LỚN NHẤT (USCLN - GCD)
+   Mô tả: Nhập 2 số a, b, tính USCLN bằng thuật toán Euclid
+   Thuật toán Euclid: GCD(a,b) = GCD(b, a%b) cho đến khi b=0
+   Độ khó: ★★☆☆☆ (Trung bình - Thuật toán nổi tiếng)
+   =================================================================== *)
+
+PROGRAM USCLN;
+
+VAR 
+    a : INTEGER;
+    b : INTEGER;
+    temp : INTEGER;
+    gcd : INTEGER;
+
+BEGIN
+  (* Bước 1: Nhập 2 số a và b *)
+  CALL WRITEC('N');
+  CALL WRITEC('h');
+  CALL WRITEC('a');
+  CALL WRITEC('p');
+  CALL WRITEC(' ');
+  CALL WRITEC('a');
+  CALL WRITEC(':');
+  CALL WRITEC(' ');
+  a := READI;
+  
+  CALL WRITEC('N');
+  CALL WRITEC('h');
+  CALL WRITEC('a');
+  CALL WRITEC('p');
+  CALL WRITEC(' ');
+  CALL WRITEC('b');
+  CALL WRITEC(':');
+  CALL WRITEC(' ');
+  b := READI;
+  
+  (* Bước 2: Xử lý số âm - lấy giá trị tuyệt đối *)
+  IF a < 0 THEN
+    a := 0 - a;
+  
+  IF b < 0 THEN
+    b := 0 - b;
+  
+  (* Bước 3: Thuật toán Euclid *)
+  (* Ý tưởng: GCD(a,b) = GCD(b, a%b) *)
+  (* Lặp cho đến khi b = 0, khi đó a là USCLN *)
+  WHILE b > 0 DO
+    BEGIN
+      (* Tính a % b *)
+      temp := a - a / b * b;
+      
+      (* Cập nhật: a = b, b = a % b *)
+      a := b;
+      b := temp
+    END;
+  
+  (* Khi vòng lặp kết thúc, a chính là USCLN *)
+  gcd := a;
+  
+  (* Bước 4: In kết quả *)
+  CALL WRITEC('U');
+  CALL WRITEC('S');
+  CALL WRITEC('C');
+  CALL WRITEC('L');
+  CALL WRITEC('N');
+  CALL WRITEC(' ');
+  CALL WRITEC('=');
+  CALL WRITEC(' ');
+  CALL WRITEI(gcd);
+  CALL WRITELN
+END.
+
+(* ===================================================================
+   VÍ DỤ CHẠY:
+   Input:  a = 48, b = 18
+   Output: USCLN = 6
+   
+   Quá trình:
+   Bước 1: a=48, b=18 → temp = 48%18 = 12
+           a=18, b=12
+   Bước 2: a=18, b=12 → temp = 18%12 = 6
+           a=12, b=6
+   Bước 3: a=12, b=6  → temp = 12%6 = 0
+           a=6, b=0
+   Dừng: b=0 → USCLN = 6
+   
+   Input:  a = 100, b = 35
+   Output: USCLN = 5
+   
+   KIẾN THỨC:
+   - Thuật toán Euclid (2300 năm tuổi!)
+   - Vòng lặp WHILE với điều kiện
+   - Kỹ thuật swap giá trị: a=b, b=temp
+   - Phép modulo: a % b = a - a / b * b
+   
+   ỨNG DỤNG:
+   - Rút gọn phân số: 48/18 = 8/3 (chia cả tử và mẫu cho USCLN=6)
+   - Mật mã học (RSA)
+   - Số học modular
+   =================================================================== *)

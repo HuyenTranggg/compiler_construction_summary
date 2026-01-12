@@ -1,0 +1,155 @@
+(* ===================================================================
+   BÀI 12: KIỂM TRA SỐ ARMSTRONG
+   Mô tả: Nhập số n, kiểm tra n có phải số Armstrong không
+   Số Armstrong: Tổng lũy thừa bậc d của các chữ số = chính nó
+   (d là số chữ số)
+   Ví dụ: 153 = 1³ + 5³ + 3³ = 1 + 125 + 27 = 153
+   Độ khó: ★★★☆☆ (Khó hơn - Kết hợp nhiều kỹ thuật)
+   =================================================================== *)
+
+PROGRAM SoArmstrong;
+
+VAR 
+    n : INTEGER;
+    temp : INTEGER;
+    sum : INTEGER;
+    digit : INTEGER;
+    numDigits : INTEGER;
+    i : INTEGER;
+    power : INTEGER;
+
+BEGIN
+  (* Bước 1: Nhập số n *)
+  CALL WRITEC('N');
+  CALL WRITEC('h');
+  CALL WRITEC('a');
+  CALL WRITEC('p');
+  CALL WRITEC(' ');
+  CALL WRITEC('n');
+  CALL WRITEC(':');
+  CALL WRITEC(' ');
+  n := READI;
+  
+  (* Bước 2: Đếm số chữ số *)
+  temp := n;
+  numDigits := 0;
+  
+  IF temp = 0 THEN
+    numDigits := 1
+  ELSE
+    BEGIN
+      IF temp < 0 THEN
+        temp := 0 - temp;
+      
+      WHILE temp > 0 DO
+        BEGIN
+          numDigits := numDigits + 1;
+          temp := temp / 10
+        END
+    END;
+  
+  (* Bước 3: Tính tổng lũy thừa các chữ số *)
+  temp := n;
+  IF temp < 0 THEN
+    temp := 0 - temp;
+  
+  sum := 0;
+  
+  WHILE temp > 0 DO
+    BEGIN
+      (* Lấy chữ số cuối *)
+      digit := temp - temp / 10 * 10;
+      
+      (* Tính digit^numDigits *)
+      power := 1;
+      FOR i := 1 TO numDigits DO
+        power := power * digit;
+      
+      (* Cộng vào tổng *)
+      sum := sum + power;
+      
+      (* Loại bỏ chữ số cuối *)
+      temp := temp / 10
+    END;
+  
+  (* Bước 4: So sánh với n *)
+  temp := n;
+  IF temp < 0 THEN
+    temp := 0 - temp;
+  
+  IF sum = temp THEN
+    BEGIN
+      CALL WRITEC('L');
+      CALL WRITEC('a');
+      CALL WRITEC(' ');
+      CALL WRITEC('s');
+      CALL WRITEC('o');
+      CALL WRITEC(' ');
+      CALL WRITEC('A');
+      CALL WRITEC('r');
+      CALL WRITEC('m');
+      CALL WRITEC('s');
+      CALL WRITEC('t');
+      CALL WRITEC('r');
+      CALL WRITEC('o');
+      CALL WRITEC('n');
+      CALL WRITEC('g');
+      CALL WRITELN
+    END
+  ELSE
+    BEGIN
+      CALL WRITEC('K');
+      CALL WRITEC('h');
+      CALL WRITEC('o');
+      CALL WRITEC('n');
+      CALL WRITEC('g');
+      CALL WRITEC(' ');
+      CALL WRITEC('A');
+      CALL WRITEC('r');
+      CALL WRITEC('m');
+      CALL WRITEC('s');
+      CALL WRITEC('t');
+      CALL WRITEC('r');
+      CALL WRITEC('o');
+      CALL WRITEC('n');
+      CALL WRITEC('g');
+      CALL WRITELN
+    END
+END.
+
+(* ===================================================================
+   VÍ DỤ CHẠY:
+   Input:  n = 153
+   Output: La so Armstrong
+   
+   Giải thích:
+   - 153 có 3 chữ số
+   - 1³ + 5³ + 3³ = 1 + 125 + 27 = 153 ✓
+   
+   Input:  n = 9474
+   Output: La so Armstrong
+   - 9474 có 4 chữ số
+   - 9⁴ + 4⁴ + 7⁴ + 4⁴ = 6561 + 256 + 2401 + 256 = 9474 ✓
+   
+   Input:  n = 123
+   Output: Khong Armstrong
+   - 123 có 3 chữ số
+   - 1³ + 2³ + 3³ = 1 + 8 + 27 = 36 ≠ 123 ✗
+   
+   KIẾN THỨC:
+   - Đếm số chữ số
+   - Tách chữ số: digit = n % 10
+   - Tính lũy thừa: power = digit^numDigits
+   - Kết hợp nhiều vòng lặp
+   
+   SỐ ARMSTRONG NỔI TIẾNG:
+   1 chữ số: 1, 2, 3, 4, 5, 6, 7, 8, 9 (tất cả)
+   2 chữ số: KHÔNG CÓ
+   3 chữ số: 153, 370, 371, 407
+   4 chữ số: 1634, 8208, 9474
+   5 chữ số: 54748, 92727, 93084
+   
+   LƯU Ý:
+   - KPL không có hàm pow() → phải dùng vòng lặp
+   - Cần lưu n vào temp để tính toán (giữ n nguyên để so sánh)
+   =================================================================== *)

@@ -1,0 +1,109 @@
+(* ===================================================================
+   BÀI 9: KIỂM TRA SỐ HOÀN HẢO (PERFECT NUMBER)
+   Mô tả: Nhập số n, kiểm tra n có phải số hoàn hảo không
+   Số hoàn hảo: Tổng các ước (không tính n) = n
+   Ví dụ: 6 = 1 + 2 + 3, 28 = 1 + 2 + 4 + 7 + 14
+   Độ khó: ★★☆☆☆ (Trung bình - Vòng lặp + tích lũy)
+   =================================================================== *)
+
+PROGRAM SoHoanHao;
+
+VAR 
+    n : INTEGER;
+    i : INTEGER;
+    sum : INTEGER;
+
+BEGIN
+  (* Bước 1: Nhập số n *)
+  CALL WRITEC('N');
+  CALL WRITEC('h');
+  CALL WRITEC('a');
+  CALL WRITEC('p');
+  CALL WRITEC(' ');
+  CALL WRITEC('n');
+  CALL WRITEC(':');
+  CALL WRITEC(' ');
+  n := READI;
+  
+  (* Bước 2: Kiểm tra điều kiện cơ bản *)
+  IF n < 2 THEN
+    BEGIN
+      CALL WRITEC('K');
+      CALL WRITEC('h');
+      CALL WRITEC('o');
+      CALL WRITEC('n');
+      CALL WRITEC('g');
+      CALL WRITEC(' ');
+      CALL WRITEC('H');
+      CALL WRITEC('H');
+      CALL WRITELN
+    END
+  ELSE
+    BEGIN
+      (* Bước 3: Tính tổng các ước của n (không tính n) *)
+      sum := 0;
+      
+      (* Duyệt từ 1 đến n-1 *)
+      FOR i := 1 TO n - 1 DO
+        IF n - n / i * i = 0 THEN  (* i là ước của n *)
+          sum := sum + i;
+      
+      (* Bước 4: So sánh tổng với n *)
+      IF sum = n THEN
+        BEGIN
+          CALL WRITEC('L');
+          CALL WRITEC('a');
+          CALL WRITEC(' ');
+          CALL WRITEC('s');
+          CALL WRITEC('o');
+          CALL WRITEC(' ');
+          CALL WRITEC('H');
+          CALL WRITEC('H');
+          CALL WRITELN
+        END
+      ELSE
+        BEGIN
+          CALL WRITEC('K');
+          CALL WRITEC('h');
+          CALL WRITEC('o');
+          CALL WRITEC('n');
+          CALL WRITEC('g');
+          CALL WRITEC(' ');
+          CALL WRITEC('H');
+          CALL WRITEC('H');
+          CALL WRITELN
+        END
+    END
+END.
+
+(* ===================================================================
+   VÍ DỤ CHẠY:
+   Input:  n = 6
+   Output: La so HH
+   Giải thích: Ước của 6: 1, 2, 3 → Tổng = 1+2+3 = 6 ✓
+   
+   Input:  n = 28
+   Output: La so HH
+   Giải thích: Ước của 28: 1, 2, 4, 7, 14 → Tổng = 28 ✓
+   
+   Input:  n = 10
+   Output: Khong HH
+   Giải thích: Ước của 10: 1, 2, 5 → Tổng = 8 ≠ 10 ✗
+   
+   KIẾN THỨC:
+   - Tìm ước số: n % i = 0
+   - Tích lũy tổng: sum = sum + i
+   - So sánh với giá trị ban đầu
+   
+   SỐ HOÀN HẢO NỔI TIẾNG:
+   - 6 = 1 + 2 + 3
+   - 28 = 1 + 2 + 4 + 7 + 14
+   - 496 = 1 + 2 + 4 + 8 + 16 + 31 + 62 + 124 + 248
+   - 8128
+   - 33550336
+   (Rất hiếm! Chỉ có 51 số hoàn hảo được biết đến)
+   
+   CÁCH TỐI ƯU HƠN:
+   - Chỉ duyệt đến sqrt(n) rồi cộng cả i và n/i
+   - Tiết kiệm thời gian với số lớn
+   =================================================================== *)

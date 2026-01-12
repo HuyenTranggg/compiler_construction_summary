@@ -1,0 +1,91 @@
+(* ===================================================================
+   BÀI 4: ĐẾM SỐ CHỮ SỐ CỦA MỘT SỐ NGUYÊN
+   Mô tả: Nhập số nguyên n, đếm xem n có bao nhiêu chữ số
+   Ví dụ: 123 có 3 chữ số, 5678 có 4 chữ số
+   Độ khó: ★☆☆☆☆ (Dễ - Vòng lặp WHILE)
+   =================================================================== *)
+
+PROGRAM DemChuSo;
+
+VAR 
+    n : INTEGER;
+    count : INTEGER;
+    temp : INTEGER;
+
+BEGIN
+  (* Bước 1: Nhập số n *)
+  CALL WRITEC('N');
+  CALL WRITEC('h');
+  CALL WRITEC('a');
+  CALL WRITEC('p');
+  CALL WRITEC(' ');
+  CALL WRITEC('n');
+  CALL WRITEC(':');
+  CALL WRITEC(' ');
+  n := READI;
+  
+  (* Bước 2: Xử lý trường hợp đặc biệt n = 0 *)
+  IF n = 0 THEN
+    count := 1  (* Số 0 có 1 chữ số *)
+  ELSE
+    BEGIN
+      (* Bước 3: Khởi tạo *)
+      count := 0;
+      temp := n;
+      
+      (* Xử lý số âm: lấy giá trị tuyệt đối *)
+      IF temp < 0 THEN
+        temp := 0 - temp;  (* temp = -temp *)
+      
+      (* Bước 4: Đếm chữ số bằng vòng lặp WHILE *)
+      (* Cú pháp: WHILE <điều_kiện> DO <câu_lệnh> *)
+      WHILE temp > 0 DO
+        BEGIN
+          count := count + 1;  (* Tăng bộ đếm *)
+          temp := temp / 10    (* Loại bỏ chữ số cuối *)
+        END
+    END;
+  
+  (* Bước 5: In kết quả *)
+  CALL WRITEC('S');
+  CALL WRITEC('o');
+  CALL WRITEC(' ');
+  CALL WRITEC('c');
+  CALL WRITEC('h');
+  CALL WRITEC('u');
+  CALL WRITEC(' ');
+  CALL WRITEC('s');
+  CALL WRITEC('o');
+  CALL WRITEC(':');
+  CALL WRITEC(' ');
+  CALL WRITEI(count);
+  CALL WRITELN
+END.
+
+(* ===================================================================
+   VÍ DỤ CHẠY:
+   Input:  n = 123
+   Output: So chu so: 3
+   
+   Input:  n = 5678
+   Output: So chu so: 4
+   
+   Input:  n = 0
+   Output: So chu so: 1
+   
+   Input:  n = -456
+   Output: So chu so: 3  (không tính dấu -)
+   
+   KIẾN THỨC:
+   - Vòng lặp WHILE với điều kiện
+   - Kỹ thuật loại bỏ chữ số cuối: n = n / 10
+   - Xử lý số âm: lấy giá trị tuyệt đối
+   - Ép kiểu tự động: temp / 10 (phép chia nguyên)
+   
+   CÁCH HOẠT ĐỘNG:
+   n = 123
+   Lần 1: temp = 123 → count = 1 → temp = 12
+   Lần 2: temp = 12  → count = 2 → temp = 1
+   Lần 3: temp = 1   → count = 3 → temp = 0
+   Dừng: temp = 0 → Kết quả: count = 3
+   =================================================================== *)

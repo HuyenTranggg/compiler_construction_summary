@@ -1,0 +1,120 @@
+(* ===================================================================
+   BÀI 8: TÍNH BỘI SỐ CHUNG NHỎ NHẤT (BSCNN - LCM)
+   Mô tả: Nhập 2 số a, b, tính BSCNN
+   Công thức: LCM(a,b) = (a * b) / GCD(a,b)
+   Độ khó: ★★☆☆☆ (Trung bình - Kết hợp với USCLN)
+   =================================================================== *)
+
+PROGRAM BSCNN;
+
+VAR 
+    a : INTEGER;
+    b : INTEGER;
+    origA : INTEGER;
+    origB : INTEGER;
+    temp : INTEGER;
+    gcd : INTEGER;
+    lcm : INTEGER;
+
+BEGIN
+  (* Bước 1: Nhập 2 số a và b *)
+  CALL WRITEC('N');
+  CALL WRITEC('h');
+  CALL WRITEC('a');
+  CALL WRITEC('p');
+  CALL WRITEC(' ');
+  CALL WRITEC('a');
+  CALL WRITEC(':');
+  CALL WRITEC(' ');
+  a := READI;
+  
+  CALL WRITEC('N');
+  CALL WRITEC('h');
+  CALL WRITEC('a');
+  CALL WRITEC('p');
+  CALL WRITEC(' ');
+  CALL WRITEC('b');
+  CALL WRITEC(':');
+  CALL WRITEC(' ');
+  b := READI;
+  
+  (* Bước 2: Lưu giá trị ban đầu *)
+  origA := a;
+  origB := b;
+  
+  (* Xử lý số âm *)
+  IF a < 0 THEN
+    a := 0 - a;
+  
+  IF b < 0 THEN
+    b := 0 - b;
+  
+  IF origA < 0 THEN
+    origA := 0 - origA;
+  
+  IF origB < 0 THEN
+    origB := 0 - origB;
+  
+  (* Bước 3: Tính USCLN bằng thuật toán Euclid *)
+  WHILE b > 0 DO
+    BEGIN
+      temp := a - a / b * b;
+      a := b;
+      b := temp
+    END;
+  
+  gcd := a;
+  
+  (* Bước 4: Tính BSCNN = (a * b) / GCD *)
+  (* Công thức: LCM(a,b) = |a * b| / GCD(a,b) *)
+  lcm := origA * origB / gcd;
+  
+  (* Bước 5: In kết quả *)
+  CALL WRITEC('U');
+  CALL WRITEC('S');
+  CALL WRITEC('C');
+  CALL WRITEC('L');
+  CALL WRITEC('N');
+  CALL WRITEC(' ');
+  CALL WRITEC('=');
+  CALL WRITEC(' ');
+  CALL WRITEI(gcd);
+  CALL WRITELN;
+  
+  CALL WRITEC('B');
+  CALL WRITEC('S');
+  CALL WRITEC('C');
+  CALL WRITEC('N');
+  CALL WRITEC('N');
+  CALL WRITEC(' ');
+  CALL WRITEC('=');
+  CALL WRITEC(' ');
+  CALL WRITEI(lcm);
+  CALL WRITELN
+END.
+
+(* ===================================================================
+   VÍ DỤ CHẠY:
+   Input:  a = 12, b = 18
+   Output: USCLN = 6
+           BSCNN = 36
+   
+   Giải thích:
+   - Ước chung của 12 và 18: 1, 2, 3, 6 → USCLN = 6
+   - Bội chung của 12 và 18: 36, 72, 108, ... → BSCNN = 36
+   - Công thức: 36 = (12 * 18) / 6 = 216 / 6
+   
+   Input:  a = 4, b = 6
+   Output: USCLN = 2
+           BSCNN = 12
+   
+   KIẾN THỨC:
+   - Công thức liên hệ: LCM × GCD = a × b
+   - Lưu giá trị ban đầu trước khi tính USCLN
+   - Kết hợp nhiều thuật toán
+   
+   ỨNG DỤNG:
+   - Quy đồng phân số: 1/12 + 1/18 cần mẫu chung = BSCNN(12,18) = 36
+   - Lịch trình: Xe A 12 phút/lượt, xe B 18 phút/lượt → gặp lại sau 36 phút
+   - Toán tổ hợp
+   =================================================================== *)

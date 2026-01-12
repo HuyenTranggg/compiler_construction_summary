@@ -1,0 +1,90 @@
+(* ===================================================================
+   BÀI 5: TÍNH TỔNG CÁC SỐ CHẴN VÀ LẺ TỪ 1 ĐẾN N
+   Mô tả: Nhập số n, tính riêng tổng số chẵn và tổng số lẻ
+   Ví dụ: n=5 → Chẵn: 2+4=6, Lẻ: 1+3+5=9
+   Độ khó: ★☆☆☆☆ (Dễ - Vòng lặp FOR + IF)
+   =================================================================== *)
+
+PROGRAM TongChanLe;
+
+VAR 
+    n : INTEGER;
+    i : INTEGER;
+    sumEven : INTEGER;
+    sumOdd : INTEGER;
+
+BEGIN
+  (* Bước 1: Nhập số n *)
+  CALL WRITEC('N');
+  CALL WRITEC('h');
+  CALL WRITEC('a');
+  CALL WRITEC('p');
+  CALL WRITEC(' ');
+  CALL WRITEC('n');
+  CALL WRITEC(':');
+  CALL WRITEC(' ');
+  n := READI;
+  
+  (* Bước 2: Khởi tạo biến tổng *)
+  sumEven := 0;  (* Tổng số chẵn *)
+  sumOdd := 0;   (* Tổng số lẻ *)
+  
+  (* Bước 3: Duyệt từ 1 đến n *)
+  FOR i := 1 TO n DO
+    BEGIN
+      (* Kiểm tra số chẵn hay lẻ *)
+      (* Cách kiểm tra: i % 2 = i - i / 2 * 2 *)
+      IF i - i / 2 * 2 = 0 THEN
+        sumEven := sumEven + i  (* i chẵn *)
+      ELSE
+        sumOdd := sumOdd + i    (* i lẻ *)
+    END;
+  
+  (* Bước 4: In kết quả *)
+  CALL WRITEC('T');
+  CALL WRITEC('o');
+  CALL WRITEC('n');
+  CALL WRITEC('g');
+  CALL WRITEC(' ');
+  CALL WRITEC('c');
+  CALL WRITEC('h');
+  CALL WRITEC('a');
+  CALL WRITEC('n');
+  CALL WRITEC(':');
+  CALL WRITEC(' ');
+  CALL WRITEI(sumEven);
+  CALL WRITELN;
+  
+  CALL WRITEC('T');
+  CALL WRITEC('o');
+  CALL WRITEC('n');
+  CALL WRITEC('g');
+  CALL WRITEC(' ');
+  CALL WRITEC('l');
+  CALL WRITEC('e');
+  CALL WRITEC(':');
+  CALL WRITEC(' ');
+  CALL WRITEI(sumOdd);
+  CALL WRITELN
+END.
+
+(* ===================================================================
+   VÍ DỤ CHẠY:
+   Input:  n = 5
+   Output: Tong chan: 6   (2 + 4 = 6)
+           Tong le: 9     (1 + 3 + 5 = 9)
+   
+   Input:  n = 10
+   Output: Tong chan: 30  (2 + 4 + 6 + 8 + 10 = 30)
+           Tong le: 25    (1 + 3 + 5 + 7 + 9 = 25)
+   
+   KIẾN THỨC:
+   - Vòng lặp FOR kết hợp IF-THEN-ELSE
+   - Kiểm tra chẵn/lẻ: n % 2 = n - n / 2 * 2
+   - BEGIN-END trong IF để nhóm nhiều câu lệnh
+   - In nhiều dòng kết quả
+   
+   CÔNG THỨC TOÁN HỌC:
+   - Tổng số lẻ từ 1 đến n: (n+1)/2 * (n+1)/2  (nếu n lẻ)
+   - Tổng số chẵn từ 2 đến n: n/2 * (n/2 + 1)  (nếu n chẵn)
+   =================================================================== *)

@@ -1,0 +1,93 @@
+(* ===================================================================
+   BÀI 2: KIỂM TRA SỐ NGUYÊN TỐ
+   Mô tả: Nhập số nguyên n, kiểm tra n có phải số nguyên tố không
+   Số nguyên tố: số > 1 chỉ chia hết cho 1 và chính nó
+   Độ khó: ★★☆☆☆ (Trung bình - Vòng lặp + điều kiện)
+   =================================================================== *)
+
+PROGRAM KiemTraSNT;
+
+VAR 
+    n : INTEGER;
+    i : INTEGER;
+    count : INTEGER;
+
+BEGIN
+  (* Bước 1: Nhập số n *)
+  CALL WRITEC('N');
+  CALL WRITEC('h');
+  CALL WRITEC('a');
+  CALL WRITEC('p');
+  CALL WRITEC(' ');
+  CALL WRITEC('n');
+  CALL WRITEC(':');
+  CALL WRITEC(' ');
+  n := READI;
+  
+  (* Bước 2: Kiểm tra điều kiện cơ bản *)
+  IF n < 2 THEN
+    BEGIN
+      (* Số nhỏ hơn 2 không phải số nguyên tố *)
+      CALL WRITEC('K');
+      CALL WRITEC('h');
+      CALL WRITEC('o');
+      CALL WRITEC('n');
+      CALL WRITEC('g');
+      CALL WRITEC(' ');
+      CALL WRITEC('N');
+      CALL WRITEC('T');
+      CALL WRITELN
+    END
+  ELSE
+    BEGIN
+      (* Bước 3: Đếm số ước của n *)
+      count := 0;
+      
+      (* Duyệt từ 2 đến n-1 để tìm ước *)
+      FOR i := 2 TO n - 1 DO
+        IF n - n / i * i = 0 THEN  (* Kiểm tra n chia hết cho i *)
+          count := count + 1;      (* n % i == 0 *)
+      
+      (* Bước 4: Kết luận *)
+      IF count = 0 THEN
+        BEGIN
+          (* Không có ước nào từ 2 đến n-1 → Là số nguyên tố *)
+          CALL WRITEC('L');
+          CALL WRITEC('a');
+          CALL WRITEC(' ');
+          CALL WRITEC('N');
+          CALL WRITEC('T');
+          CALL WRITELN
+        END
+      ELSE
+        BEGIN
+          (* Có ước → Không phải số nguyên tố *)
+          CALL WRITEC('K');
+          CALL WRITEC('h');
+          CALL WRITEC('o');
+          CALL WRITEC('n');
+          CALL WRITEC('g');
+          CALL WRITEC(' ');
+          CALL WRITEC('N');
+          CALL WRITEC('T');
+          CALL WRITELN
+        END
+    END
+END.
+
+(* ===================================================================
+   VÍ DỤ CHẠY:
+   Input:  n = 7
+   Output: La NT  (7 là số nguyên tố)
+   
+   Input:  n = 10
+   Output: Khong NT  (10 = 2 × 5, không phải số nguyên tố)
+   
+   Input:  n = 1
+   Output: Khong NT  (1 không phải số nguyên tố)
+   
+   KIẾN THỨC:
+   - Phép toán modulo: n % i = n - n / i * i
+   - Cấu trúc IF-THEN-ELSE lồng nhau
+   - Vòng lặp FOR với biểu thức trong TO
+   =================================================================== *)

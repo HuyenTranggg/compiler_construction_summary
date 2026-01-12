@@ -1,0 +1,91 @@
+(* ===================================================================
+   BÀI 6: ĐẢO NGƯỢC MỘT SỐ NGUYÊN
+   Mô tả: Nhập số nguyên n, in ra số đảo ngược của n
+   Ví dụ: 123 → 321, 4560 → 654
+   Độ khó: ★★☆☆☆ (Trung bình - Vòng lặp WHILE + toán học)
+   =================================================================== *)
+
+PROGRAM DaoNguocSo;
+
+VAR 
+    n : INTEGER;
+    reversed : INTEGER;
+    digit : INTEGER;
+    temp : INTEGER;
+
+BEGIN
+  (* Bước 1: Nhập số n *)
+  CALL WRITEC('N');
+  CALL WRITEC('h');
+  CALL WRITEC('a');
+  CALL WRITEC('p');
+  CALL WRITEC(' ');
+  CALL WRITEC('n');
+  CALL WRITEC(':');
+  CALL WRITEC(' ');
+  n := READI;
+  
+  (* Bước 2: Khởi tạo *)
+  reversed := 0;
+  temp := n;
+  
+  (* Xử lý số âm *)
+  IF temp < 0 THEN
+    temp := 0 - temp;  (* Lấy giá trị tuyệt đối *)
+  
+  (* Bước 3: Đảo ngược số bằng vòng lặp WHILE *)
+  WHILE temp > 0 DO
+    BEGIN
+      (* Lấy chữ số cuối cùng *)
+      digit := temp - temp / 10 * 10;  (* digit = temp % 10 *)
+      
+      (* Thêm chữ số vào kết quả đảo ngược *)
+      reversed := reversed * 10 + digit;
+      
+      (* Loại bỏ chữ số cuối *)
+      temp := temp / 10
+    END;
+  
+  (* Xử lý dấu âm cho kết quả *)
+  IF n < 0 THEN
+    reversed := 0 - reversed;
+  
+  (* Bước 4: In kết quả *)
+  CALL WRITEC('S');
+  CALL WRITEC('o');
+  CALL WRITEC(' ');
+  CALL WRITEC('d');
+  CALL WRITEC('a');
+  CALL WRITEC('o');
+  CALL WRITEC(':');
+  CALL WRITEC(' ');
+  CALL WRITEI(reversed);
+  CALL WRITELN
+END.
+
+(* ===================================================================
+   VÍ DỤ CHẠY:
+   Input:  n = 123
+   Output: So dao: 321
+   
+   Input:  n = 4560
+   Output: So dao: 654  (bỏ số 0 ở cuối)
+   
+   Input:  n = -789
+   Output: So dao: -987
+   
+   KIẾN THỨC:
+   - Kỹ thuật xây dựng số từ các chữ số
+   - Công thức: reversed = reversed * 10 + digit
+   - Lấy chữ số cuối: digit = n % 10 = n - n / 10 * 10
+   - Loại bỏ chữ số cuối: n = n / 10
+   
+   CÁCH HOẠT ĐỘNG (n = 123):
+   Bước 1: temp = 123, reversed = 0
+           digit = 3, reversed = 0*10 + 3 = 3, temp = 12
+   Bước 2: temp = 12, reversed = 3
+           digit = 2, reversed = 3*10 + 2 = 32, temp = 1
+   Bước 3: temp = 1, reversed = 32
+           digit = 1, reversed = 32*10 + 1 = 321, temp = 0
+   Kết quả: reversed = 321
+   =================================================================== *)

@@ -1,0 +1,145 @@
+(* ===================================================================
+   BÀI 11: TÍNH TỔ HỢP C(n,k)
+   Mô tả: Nhập n và k, tính số tổ hợp chập k của n
+   Công thức: C(n,k) = n! / (k! × (n-k)!)
+   Độ khó: ★★★☆☆ (Khó hơn giai thừa - Cần tính 3 giai thừa)
+   =================================================================== *)
+
+PROGRAM ToHop;
+
+VAR 
+    n : INTEGER;
+    k : INTEGER;
+    i : INTEGER;
+    factN : INTEGER;
+    factK : INTEGER;
+    factNK : INTEGER;
+    result : INTEGER;
+
+BEGIN
+  (* Bước 1: Nhập n và k *)
+  CALL WRITEC('N');
+  CALL WRITEC('h');
+  CALL WRITEC('a');
+  CALL WRITEC('p');
+  CALL WRITEC(' ');
+  CALL WRITEC('n');
+  CALL WRITEC(':');
+  CALL WRITEC(' ');
+  n := READI;
+  
+  CALL WRITEC('N');
+  CALL WRITEC('h');
+  CALL WRITEC('a');
+  CALL WRITEC('p');
+  CALL WRITEC(' ');
+  CALL WRITEC('k');
+  CALL WRITEC(':');
+  CALL WRITEC(' ');
+  k := READI;
+  
+  (* Bước 2: Kiểm tra điều kiện hợp lệ *)
+  IF k > n THEN
+    BEGIN
+      (* k không thể lớn hơn n *)
+      CALL WRITEC('K');
+      CALL WRITEC('h');
+      CALL WRITEC('o');
+      CALL WRITEC('n');
+      CALL WRITEC('g');
+      CALL WRITEC(' ');
+      CALL WRITEC('h');
+      CALL WRITEC('o');
+      CALL WRITEC('p');
+      CALL WRITEC(' ');
+      CALL WRITEC('l');
+      CALL WRITEC('e');
+      CALL WRITELN
+    END
+  ELSE
+    IF k < 0 THEN
+      BEGIN
+        CALL WRITEC('K');
+        CALL WRITEC('h');
+        CALL WRITEC('o');
+        CALL WRITEC('n');
+        CALL WRITEC('g');
+        CALL WRITEC(' ');
+        CALL WRITEC('h');
+        CALL WRITEC('o');
+        CALL WRITEC('p');
+        CALL WRITEC(' ');
+        CALL WRITEC('l');
+        CALL WRITEC('e');
+        CALL WRITELN
+      END
+    ELSE
+      BEGIN
+        (* Bước 3: Tính n! *)
+        factN := 1;
+        FOR i := 1 TO n DO
+          factN := factN * i;
+        
+        (* Bước 4: Tính k! *)
+        factK := 1;
+        FOR i := 1 TO k DO
+          factK := factK * i;
+        
+        (* Bước 5: Tính (n-k)! *)
+        factNK := 1;
+        FOR i := 1 TO n - k DO
+          factNK := factNK * i;
+        
+        (* Bước 6: Tính C(n,k) = n! / (k! × (n-k)!) *)
+        result := factN / factK / factNK;
+        
+        (* Bước 7: In kết quả *)
+        CALL WRITEC('C');
+        CALL WRITEC('(');
+        CALL WRITEI(n);
+        CALL WRITEC(',');
+        CALL WRITEI(k);
+        CALL WRITEC(')');
+        CALL WRITEC(' ');
+        CALL WRITEC('=');
+        CALL WRITEC(' ');
+        CALL WRITEI(result);
+        CALL WRITELN
+      END
+END.
+
+(* ===================================================================
+   VÍ DỤ CHẠY:
+   Input:  n = 5, k = 2
+   Output: C(5,2) = 10
+   
+   Giải thích:
+   - C(5,2) = 5! / (2! × 3!) = 120 / (2 × 6) = 120 / 12 = 10
+   - Ý nghĩa: Có 10 cách chọn 2 phần tử từ 5 phần tử
+   - Ví dụ: {1,2}, {1,3}, {1,4}, {1,5}, {2,3}, {2,4}, {2,5}, {3,4}, {3,5}, {4,5}
+   
+   Input:  n = 4, k = 4
+   Output: C(4,4) = 1
+   (Chỉ có 1 cách chọn cả 4 phần tử)
+   
+   Input:  n = 6, k = 3
+   Output: C(6,3) = 20
+   
+   KIẾN THỨC:
+   - Công thức tổ hợp: C(n,k) = n! / (k! × (n-k)!)
+   - Tính nhiều giai thừa
+   - Kiểm tra điều kiện: k ≤ n, k ≥ 0
+   - Chia liên tiếp: a / b / c = (a / b) / c
+   
+   TÍNH CHẤT:
+   - C(n,0) = 1 (chọn 0 phần tử)
+   - C(n,n) = 1 (chọn tất cả)
+   - C(n,k) = C(n, n-k) (đối xứng)
+   - C(n,1) = n (chọn 1 phần tử)
+   
+   ỨNG DỤNG:
+   - Xác suất: tính số kết quả có thể
+   - Đề thi trắc nghiệm: chọn 10 câu từ 20 câu
+   - Xổ số: chọn 6 số từ 45 số
+   - Tam giác Pascal
+   =================================================================== *)

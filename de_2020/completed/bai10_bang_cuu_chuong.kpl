@@ -1,0 +1,100 @@
+(* ===================================================================
+   BÀI 10: IN BẢNG CỬU CHƯƠNG
+   Mô tả: Nhập số n, in bảng cửu chương từ 1 đến n
+   Ví dụ: n=3 → in bảng 1, 2, 3
+   Độ khó: ★☆☆☆☆ (Dễ - Vòng lặp lồng nhau)
+   =================================================================== *)
+
+PROGRAM BangCuuChuong;
+
+VAR 
+    n : INTEGER;
+    i : INTEGER;
+    j : INTEGER;
+
+BEGIN
+  (* Bước 1: Nhập số n *)
+  CALL WRITEC('N');
+  CALL WRITEC('h');
+  CALL WRITEC('a');
+  CALL WRITEC('p');
+  CALL WRITEC(' ');
+  CALL WRITEC('n');
+  CALL WRITEC(':');
+  CALL WRITEC(' ');
+  n := READI;
+  
+  (* Bước 2: In bảng cửu chương từ 1 đến n *)
+  (* Vòng lặp ngoài: duyệt từng bảng (1, 2, 3, ..., n) *)
+  FOR i := 1 TO n DO
+    BEGIN
+      (* In tiêu đề bảng *)
+      CALL WRITEC('B');
+      CALL WRITEC('a');
+      CALL WRITEC('n');
+      CALL WRITEC('g');
+      CALL WRITEC(' ');
+      CALL WRITEI(i);
+      CALL WRITEC(':');
+      CALL WRITELN;
+      
+      (* Vòng lặp trong: in các phép nhân (i×1, i×2, ..., i×10) *)
+      FOR j := 1 TO 10 DO
+        BEGIN
+          CALL WRITEC(' ');
+          CALL WRITEC(' ');
+          CALL WRITEI(i);
+          CALL WRITEC(' ');
+          CALL WRITEC('x');
+          CALL WRITEC(' ');
+          CALL WRITEI(j);
+          CALL WRITEC(' ');
+          CALL WRITEC('=');
+          CALL WRITEC(' ');
+          CALL WRITEI(i * j);
+          CALL WRITELN
+        END;
+      
+      (* Dòng trống giữa các bảng *)
+      CALL WRITELN
+    END
+END.
+
+(* ===================================================================
+   VÍ DỤ CHẠY:
+   Input:  n = 2
+   Output: 
+   Bang 1:
+     1 x 1 = 1
+     1 x 2 = 2
+     1 x 3 = 3
+     ...
+     1 x 10 = 10
+   
+   Bang 2:
+     2 x 1 = 2
+     2 x 2 = 4
+     2 x 3 = 6
+     ...
+     2 x 10 = 20
+   
+   KIẾN THỨC:
+   - Vòng lặp lồng nhau (nested loop)
+   - Vòng ngoài: điều khiển bảng nào
+   - Vòng trong: điều khiển dòng nào trong bảng
+   - Format output: căn chỉnh, dấu cách
+   
+   CẤU TRÚC VÒNG LẶP LỒNG:
+   FOR i := 1 TO n DO          ← Vòng ngoài (n lần)
+     BEGIN
+       FOR j := 1 TO 10 DO     ← Vòng trong (10 lần)
+         BEGIN
+           (* Thực thi n × 10 lần tổng cộng *)
+         END
+     END
+   
+   ỨNG DỤNG:
+   - Xử lý ma trận
+   - In hình tam giác, kim cương
+   - Duyệt mảng 2 chiều
+   =================================================================== *)

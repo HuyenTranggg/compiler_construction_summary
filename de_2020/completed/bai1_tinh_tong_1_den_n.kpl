@@ -1,0 +1,55 @@
+(* ===================================================================
+   BÀI 1: TÍNH TỔNG TỪ 1 ĐẾN N
+   Mô tả: Nhập số nguyên n, tính tổng 1 + 2 + 3 + ... + n
+   Độ khó: ★☆☆☆☆ (Dễ - Vòng lặp FOR cơ bản)
+   =================================================================== *)
+
+PROGRAM TinhTong;
+
+VAR 
+    n : INTEGER;
+    sum : INTEGER;
+    i : INTEGER;
+
+BEGIN
+  (* Bước 1: Nhập số n *)
+  CALL WRITEC('N');
+  CALL WRITEC('h');
+  CALL WRITEC('a');
+  CALL WRITEC('p');
+  CALL WRITEC(' ');
+  CALL WRITEC('n');
+  CALL WRITEC(':');
+  CALL WRITEC(' ');
+  n := READI;
+  
+  (* Bước 2: Khởi tạo tổng = 0 *)
+  sum := 0;
+  
+  (* Bước 3: Dùng vòng lặp FOR để tính tổng *)
+  (* Cú pháp: FOR <biến> := <giá_trị_đầu> TO <giá_trị_cuối> DO <câu_lệnh> *)
+  FOR i := 1 TO n DO
+    sum := sum + i;  (* Cộng dồn từng số vào tổng *)
+  
+  (* Bước 4: In kết quả *)
+  CALL WRITEC('T');
+  CALL WRITEC('o');
+  CALL WRITEC('n');
+  CALL WRITEC('g');
+  CALL WRITEC(' ');
+  CALL WRITEC('=');
+  CALL WRITEC(' ');
+  CALL WRITEI(sum);
+  CALL WRITELN;
+  
+  (* Công thức toán học: sum = n * (n + 1) / 2 *)
+END.
+
+(* ===================================================================
+   VÍ DỤ CHẠY:
+   Input:  n = 5
+   Output: Tong = 15  (vì 1+2+3+4+5 = 15)
+   
+   Input:  n = 10
+   Output: Tong = 55  (vì 1+2+3+...+10 = 55)
+   =================================================================== *)
